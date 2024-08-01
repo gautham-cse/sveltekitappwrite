@@ -16,7 +16,7 @@
 
         const { email } = formData 
         if (!email) {
-            isDialogOpen = true 
+            isDialogOpen = true
             return 
         }
         try {
