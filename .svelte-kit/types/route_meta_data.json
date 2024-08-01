@@ -1,0 +1,9 @@
+{
+	"/": [],
+	"/chat": [
+		"src/routes/chat/+page.js"
+	],
+	"/forgot": [],
+	"/magic-url": [],
+	"/register": []
+}
