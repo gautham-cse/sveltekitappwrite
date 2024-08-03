@@ -1,3 +1,11 @@
+<!-- Register.Svelte -->
+
+<svelte:head>
+    <title>App | Magic URL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</svelte:head>
+
 <script>
     // @ts-nocheck
     import '../styles/app.css'
@@ -20,7 +28,7 @@
             return 
         }
         try {
-        await account.createMagicURLToken(ID.unique(), email, 'http://localhost:5173') 
+        await account.createMagicURLToken(ID.unique(), email, 'https://sveltekitappwrite-j8f.pages.dev/') 
         }
         catch(e) {}
     }
@@ -29,8 +37,6 @@
         isDialogOpen = false 
     }
 </script>
-
-
 
 <div class="a-0">
     <div class="a-1 0-x">
@@ -41,7 +47,7 @@
                     <p class="a-3--y">Enter email address and check inbox to SignIn</p>
                 </div>
                 <form on:submit|preventDefault={sendMagicUrl}>
-                    <div class="a-3--z"><input placeholder="Email address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
+                    <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/register">Go Back</a></div></div>
                     <button class="a-3--submitBtn" type="submit">Continue</button>
                 </form>

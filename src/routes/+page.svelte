@@ -2,8 +2,9 @@
 <!-- App.svelte  -->
 
 <svelte:head>
-    <title>Secure Messenger +</title>
-    
+    <title>App | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 </svelte:head>
 
 <script>
@@ -77,7 +78,6 @@
             window.removeEventListener('keydown', handleKeydown)
         }
     })
-
 </script>
 
 <div class="a-0">
@@ -96,7 +96,7 @@
                 </div>
 
                 <form on:submit|preventDefault={airbase_login}>
-                    <div class="a-3--z"><input placeholder="Email address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
+                    <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--z"><input type="password" placeholder="Enter Password" name="password" class="app-input--password" minlength="8"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/register">New here? Register</a></div><div class="a-3-al--right"><a href="/forgot">Forgot Password?</a></div></div>
                     <button class="a-3--submitBtn" type="submit" disabled={isLoading}>Continue</button>

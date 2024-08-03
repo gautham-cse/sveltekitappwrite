@@ -39,8 +39,8 @@
 </script>
 
 <main>
-    {#if user} 
-        <h1>Welcome, {user.name}</h1>
+    {#if user}
+        <h1 style="color: white;">Welcome, {user.name}</h1>
         <button on:click={logout}>Logout</button>
     {/if}
 </main>

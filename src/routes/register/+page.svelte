@@ -1,7 +1,9 @@
 <!-- App.svelte  -->
 
 <svelte:head>
-    <title>Secure Messenger +</title>
+    <title>App | Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </svelte:head>
 
 <script>
@@ -86,7 +88,7 @@
                 <div class="a-google__auth" style="margin-bottom: 20px"></div>
                 <form on:submit={airbase_register}>
                     <div class="a-3--z"><input placeholder="Username" type="text" class="app-input--username" draggable="false" id="app-name" name="name" autocomplete="off" spellcheck="false"/></div>
-                    <div class="a-3--z"><input placeholder="Email address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
+                    <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--z"><input placeholder="Enter Password" type="password" name="password" class="app-input--password"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/">Have account? Login</a></div><div class="a-3-al-right"></div></div>
                     <button class="a-3--submitBtn" type="submit">Continue</button>
