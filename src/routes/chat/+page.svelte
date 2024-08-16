@@ -1,4 +1,4 @@
-<!-- Chat.Svelte / Testing -->
+<!-- Chat.Svelte -->
 
 <svelte:head>
     <title>Home</title>
@@ -6,41 +6,31 @@
 
 <script>
     // @ts-nocheck
-    import { onMount } from 'svelte'
-    import { goto } from '$app/navigation'
     import '../styles/app.css'
     import '../styles/chat.css'
+    import { onMount } from 'svelte'
+    import { goto } from '$app/navigation'
     import { account } from '$lib/appwrite'
-
-    let user = null 
-    const fetchUser = async () => {
-        try {
-            user = await account.get()
-            console.clear()
-        }
-        catch(e) {
-            goto('/')
-        }
-    } 
-
-    const logout = async () => {
-        try {
-            await account.deleteSession('current')
-            await user.logout
-            user = null
-            goto('/')
-            console.clear()
-        }
-        catch(e) {
-        }
-    }
-
-    onMount(()=> { fetchUser() })
+    import NavigationFooter from '../components/navigation-footer/+page.svelte'
+    import NavigationRail from '../components/navigation-rail/+page.svelte'
 </script>
 
 <main>
-    {#if user}
-        <h1 style="color: white;">Welcome, {user.name}</h1>
-        <button on:click={logout}>Logout</button>
-    {/if}
+    <div class="App-Chat">
+        <div class="App-Navigation--Area">
+            <div class="App-LeftNavigation--Area">
+                <NavigationRail />
+            </div>
+            <div class="App-RightNavigation--Area">
+
+            </div>
+        </div>
+    </div>
 </main>
+
+<style>
+    .App-LeftNavigation--Area {
+        position: fixed;
+        left: 0;
+    }
+</style>

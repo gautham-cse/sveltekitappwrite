@@ -1,8 +1,11 @@
 <!-- © Airbase Corp 2024 -->
 <!-- Layout.Svelte -->
 
-<script>
+<svelte:head>
+  <title>App | Loading</title>
+</svelte:head>
 
+<script>
   // @ts-nocheck
   import './styles/app.css'
   import { onMount } from 'svelte'
@@ -11,15 +14,21 @@
   let errorCode = null
 
   onMount(async () => {
-      try {
-          await new Promise(resolve => setTimeout(resolve, 1500))
-      } catch (e) {
-          errorCode = 102
-      } finally {
-          isLoading = false
+      const hasLoadedBefore = localStorage.getItem('x-airbasecorp--splashInit')
+      if (!hasLoadedBefore) {
+        try {
+          await new Promise(resolve => setTimeout(resolve, 3500))
+        } catch (e) {
+            errorCode = 102
+        } finally {
+            isLoading = false
+            localStorage.setItem('x-airbasecorp--splashInit', 'true')
+        }
+      }
+      else {
+        isLoading = false 
       }
   })
-
 </script>
 
 {#if isLoading}
@@ -34,9 +43,6 @@
   <slot />
 {/if}
 
-
-
-
 <style>
 .overlay {
   position: absolute;
@@ -46,7 +52,6 @@
   bottom: 0;
   margin: auto;
 }
-
 .spinner {
   font-size: 30px;
   position: relative;
@@ -62,7 +67,6 @@
   bottom: 0;
   margin: auto;
 }
-
 .spinner-blade {
   position: absolute;
   left: 0.4629em;

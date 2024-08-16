@@ -1,8 +1,9 @@
 {
 	"/": [],
-	"/chat": [
-		"src/routes/chat/+page.js"
-	],
+	"/appStartRecovery": [],
+	"/chat": [],
+	"/components/navigation-footer": [],
+	"/components/navigation-rail": [],
 	"/forgot": [],
 	"/magic-url": [],
 	"/register": []

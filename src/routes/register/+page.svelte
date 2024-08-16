@@ -12,6 +12,7 @@
     import { onMount } from 'svelte'
     import { user } from '$lib/user'
     import { goto } from '$app/navigation';
+  import { account } from '$lib/appwrite';
 
     /* @type {string|null} */
     let formError = null 
@@ -59,11 +60,21 @@
         }
     }
 
+    async function checkStatus() {
+        try {
+            const resp = await account.get()
+            if (resp) {
+                goto('/chat')
+            }
+        } catch(e) {}
+    }
+
     // @ts-ignore
     function closeDialog() { 
         isDialogOpen = false 
     }
     onMount(() => {
+        checkStatus()
         // @ts-ignore
         function handleKeydown(e){ 
             if (e.key === 'Escape') { 
@@ -75,9 +86,13 @@
             window.removeEventListener('keydown', handleKeydown)
         }
     })
+
+    function handleContextMenu(e) {
+        e.preventDefault()
+    }
 </script>
 
-<div class="a-0">
+<div class="a-0" on:contextmenu={handleContextMenu} aria-label="Disable right-click context menu" role="button" tabindex="0">
     <div class="a-1 0-x">
         <div class="a-2--x">
             <div>

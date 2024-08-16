@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/magic-url/+page.svelte";
+export { default as component } from "../../../../src/routes/components/navigation-footer/+page.svelte";

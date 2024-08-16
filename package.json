@@ -10,7 +10,6 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@iconify/svelte": "^4.0.2",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-cloudflare": "^4.7.0",
 		"@sveltejs/kit": "^2.0.0",
@@ -22,10 +21,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@corbado/web-js": "^2.9.0",
 		"@mdi/font": "^7.4.47",
 		"appwrite": "^15.0.0",
-		"lucide-svelte": "^0.417.0",
 		"mdi": "^2.2.43",
 		"npm": "^10.8.2",
 		"svelte-routing": "^2.13.0"

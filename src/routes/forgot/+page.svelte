@@ -10,8 +10,9 @@
     import '../styles/app.css'
     import { account, ID } from '$lib/appwrite'
     import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
+    import { goto } from '$app/navigation';
     
+    let formError = null 
     let isDialogOpen = false 
 
     const sendMagicUrl = async (e) => {
@@ -24,28 +25,60 @@
 
         const { email } = formData 
         if (!email) {
+            formError = 'Please enter your email'
             isDialogOpen = true
             return 
         }
         try {
-            await account.createRecovery(email, 'https://sveltekitappwrite-j8f.pages.dev/')
+            await account.createRecovery(email, 'http://localhost:5173/appStartRecovery')
               .then((response) => {
                  console.log(response)
               }, (error) => {
                  console.log(error)
               })
+            formError = 'Recovery email successfully sent. Redirecting to login in few seconds'
+            alert(formError)
+            setTimeout(()=>{
+                goto('/')
+            }, 4000)
         }
         catch(e) {
-            alert('Failed to send password recovery email')
+            formError = 'Failed to send password recovery email'
         }
     }
 
     function closeDialog() {
         isDialogOpen = false
     }
+
+    async function checkStatus() {
+        try {
+            const resp = await account.get()
+            if (resp) {
+                goto('/chat')
+            }
+        } catch(e) {}
+    }
+
+    onMount(() => {
+        checkStatus()
+        function handleKeydown(e) {
+            if (e.key === 'Escape') {
+                closeDialog()
+            }
+        }
+        window.addEventListener('keydown', handleKeydown)
+        return () => {
+            window.removeEventListener('keydown', handleKeydown)
+        }
+    })
+
+    function handleContextMenu(e) {
+        e.preventDefault()
+    }
 </script>
 
-<div class="a-0">
+<div class="a-0" on:contextmenu={handleContextMenu} aria-label="Disable right-click context menu" role="button" tabindex="0">
     <div class="a-1 0-x">
         <div class="a-2--x">
             <div>
@@ -67,7 +100,7 @@
             {#if isDialogOpen}
                 <div class="dialog-overlay">
                     <div class="dialog">
-                        Please fill all the fields to continue
+                        {formError}
                         <button on:click={closeDialog}>Close</button>
                     </div>
                 </div>

@@ -11,6 +11,7 @@
     import '../styles/app.css'
     import { account, ID } from '$lib/appwrite'
     import { onMount } from 'svelte';
+    import { goto } from '$app/navigation';
     
     let isDialogOpen = false 
 
@@ -28,7 +29,7 @@
             return 
         }
         try {
-        await account.createMagicURLToken(ID.unique(), email, 'https://sveltekitappwrite-j8f.pages.dev/') 
+            await account.createMagicURLToken(ID.unique(), email, 'http://localhost:5173/') 
         }
         catch(e) {}
     }
@@ -36,20 +37,46 @@
     function closeDialog() {
         isDialogOpen = false 
     }
+
+    async function checkStatus() {
+        try {
+            const resp = await account.get()
+            if (resp) {
+                goto('/chat')
+            }
+        } catch(e) {}
+    }
+
+    onMount(() => {
+        checkStatus()
+        function handleKeydown(e) {
+            if (e.key === 'Escape') {
+                closeDialog()
+            }
+        }
+        window.addEventListener('keydown', handleKeydown)
+        return () => {
+            window.removeEventListener('keydown', handleKeydown)
+        }
+    })
+
+    function handleContextMenu(e) {
+        e.preventDefault()
+    }
 </script>
 
-<div class="a-0">
+<div class="a-0" on:contextmenu={handleContextMenu} aria-label="Disable right-click context menu" role="button" tabindex="0">
     <div class="a-1 0-x">
         <div class="a-2--x">
             <div>
                 <div>
                     <h2 class="a-3--x">Secure Messenger +</h2>
-                    <p class="a-3--y">Enter email address and check inbox to SignIn</p>
+                    <p class="a-3--y">Please enter your email and check inbox to SignIn</p>
                 </div>
                 <form on:submit|preventDefault={sendMagicUrl}>
                     <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
-                    <div class="a-3--alpha"><div class="a-3-al--left"><a href="/register">Go Back</a></div></div>
-                    <button class="a-3--submitBtn" type="submit">Continue</button>
+                    <div class="a-3--alpha"><div class="a-3-al--left"><a href="/">Go Back</a></div></div>
+                    <button class="a-3--submitBtn" type="submit">Send Magic Link</button>
                 </form>
                 <div style="display:flex; justify-content: center; margin-top: -10px;"><p class="app-ftrnt"></p></div>
             </div>
