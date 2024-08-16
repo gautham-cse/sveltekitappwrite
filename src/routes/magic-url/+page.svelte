@@ -29,7 +29,7 @@
             return 
         }
         try {
-            await account.createMagicURLToken(ID.unique(), email, 'http://localhost:5173/') 
+            await account.createMagicURLToken(ID.unique(), email, 'https://sveltekitappwrite-j8f.pages.dev/') 
         }
         catch(e) {}
     }
