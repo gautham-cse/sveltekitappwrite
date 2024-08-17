@@ -17,7 +17,7 @@
       const hasLoadedBefore = localStorage.getItem('x-airbasecorp--splashInit')
       if (!hasLoadedBefore) {
         try {
-          await new Promise(resolve => setTimeout(resolve, 3500))
+          await new Promise(resolve => setTimeout(resolve, 1500))
         } catch (e) {
             errorCode = 102
         } finally {

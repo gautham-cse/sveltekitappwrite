@@ -18,12 +18,9 @@
     const sendMagicUrl = async (e) => {
         e.preventDefault()
         const form = e.target 
-
-        const formData = Object.fromEntries(/** @type Record<string, string | undefined>*/
-            new FormData(form).entries()
-        )
-
+        const formData = Object.fromEntries(/** @type Record<string, string | undefined>*/ new FormData(form).entries() )
         const { email } = formData 
+        
         if (!email) {
             formError = 'Please enter your email'
             isDialogOpen = true

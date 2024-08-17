@@ -139,35 +139,33 @@ body {
     text-transform: none;
     height: 32px;
     width: 224px;
-    border-radius: 6px;
+    border-radius: 9px;
     border: 1px solid transparent;
     padding-left: 10px;
     background: #1b1b1b;
-    color: rgb(155, 155, 155);
+    color: white;
     outline: none;
     margin-bottom: 8px;
     font-weight: 300;
     font-size: 13px;
-    letter-spacing: 0px;
-    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 .app-input--password {
     height: 32px;
     width: 224px;
-    border-radius: 6px;
+    border-radius: 9px;
     border: 1px solid transparent;
     padding-left: 10px;
     background: #1b1b1b;
-    color: rgb(155, 155, 155);
+    color: white;
     outline: none;
     margin-bottom: 8px;
     font-size: 13px;
     font-weight: 300;
-    letter-spacing: 0.33px;
-    font-family: inherit, Arial, Helvetica, sans-serif;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 .app-input--username:focus, .app-input--email:focus, .app-input--password:focus {
-    background-color: black;
+    background-color: #2E2E2E;
     border: 1px solid var(--app-link-color);
 }
 .a-3--alpha {
@@ -175,11 +173,11 @@ body {
     justify-content: center;
 }
 .a-3-al--left {
-    margin-left: 1px;
+    margin-left: 3px;
     margin-right: auto;
 }
 .a-3-al--right {
-    margin-right: 4px;
+    margin-right: 5px;
 }
 a{
     color: var(--app-link-color) !important;
@@ -219,22 +217,19 @@ button:focus {
 .a-google__auth > button {
     width: 240px;
     height: 32px;
-    border-radius: 4px;
+    border-radius: 48px;
+    font-family: 'Google Sans' !important;
     color: rgb(214, 214, 214) !important;
     border: 1px solid transparent; cursor: pointer;
     display: flex; align-items: center;
     justify-content: center;
     font-weight: 300;
     font-style: normal;
-    letter-spacing: 0.7px;
-    background-color: #2E2E2E;
-    /* 
-        background: -webkit-linear-gradient(225deg, white, goldenrod,             
-        var(--app-color-blue)) 0% 0% / 300% 300%;
-        background-size: 200% auto;
-        -webkit-animation: gradient_move 5s ease-in-out infinite alternate;
-        animation: gradient_move 5s ease-in-out infinite alternate;
-    */
+    background: -webkit-linear-gradient(225deg, #1b1b1b, #303030,             
+    #1b1b1b) 0% 0% / 300% 300%;
+    background-size: 200% auto;
+    -webkit-animation: gradient_move 5s ease-in-out infinite alternate;
+    animation: gradient_move 5s ease-in-out infinite alternate;
 }
 @-webkit-keyframes gradient_move {
     0%{background-position: 0% 92%}
@@ -248,12 +243,12 @@ button:focus {
     100%{background-position: 0% 92%}
   }
 .a-google__auth > button:hover {
-    background-color: none;
+    background-color: #292929;
 }
 .a-google__auth > button:focus {
     border: 1px solid #027FFF;
     font-style: normal;
-    background-color: black;
+    background-color: #252526;
 }
 .a-google__auth > button:focus::before {
     content: '';
@@ -277,16 +272,26 @@ hr {
 }
 .a-4 {
     top: 3%;
-    left: 260px;
+    left: 17%;
     position: fixed;
     border-radius: 100px;
     background-color: #027FFF;
+}
+@media screen and (max-width : 800px){
+    .a-4 {
+        left: 5%;
+    }
+}
+@media screen and (min-width: 700px) {
+    .a-4 {
+        left: 32%;
+    }
 }
 .dialog-overlay {
     padding: 8px;
     padding-left: 10px;
     color: white;
-    font-weight: 900;
+    font-weight: 700;
     font-size: 13px;
 }
 .dialog-overlay > .dialog > button {
