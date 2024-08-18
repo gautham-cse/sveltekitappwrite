@@ -33,6 +33,7 @@
             }
         }
         catch(e) {
+            goto('/')
             console.log('An unknown error occurred: ', e)
         }
     }
