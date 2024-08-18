@@ -13,7 +13,7 @@
     import { goto } from '$app/navigation';
     
     let formError = null 
-    let isDialogOpen = false 
+    let isDialogOpen = false
 
     const sendMagicUrl = async (e) => {
         e.preventDefault()
@@ -26,8 +26,9 @@
             isDialogOpen = true
             return 
         }
+
         try {
-            await account.createRecovery(email, 'https://sveltekitappwrite-j8f.pages.dev/appStartRecovery')
+            await account.createRecovery(email, 'http://localhost:5173/appStartRecovery')
               .then((response) => {
                  console.log(response)
               }, (error) => {

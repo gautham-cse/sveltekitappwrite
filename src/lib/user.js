@@ -50,5 +50,3 @@ const createUser = () => {
 }
 
 export const user = createUser()
-
-

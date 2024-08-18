@@ -18,43 +18,49 @@
     let formError = null
     let isDialogOpen = false
     let isLoading = false
-
+    
+    console.log('%cStop!', 'color: red; font-size: 45px; font-weight: bold;');
+    console.log('%cThis a browser feature intended for developers. If someone told you to copy-paste something here to enable a <Secure Messenger> feature or "hack" someone\'s account, it is a scam and will give them access to your <Secure Messenger> account.', 'color: white; font-size: 20px;')
+    
     const airbase_login = async (e) => {
         e.preventDefault()
-        const form = e.target
-        isLoading = true 
+        isLoading = true
+
+        const form = e.target 
         const formData = Object.fromEntries(new FormData(form).entries())
         const { email, password } = formData
-        
+            
         if (!email || !password) {
             formError = 'Please fill out all fields'
             isDialogOpen = true
             isLoading = false 
             return
         }
-        
+
         try {
             await user.login(email, password)
-            console.clear()
             goto('/chat')
         } catch (e) {
-            alert(e)
+            alert(`Failed to login: ` + e)
+            window.location.reload()
         } finally {
             isLoading = false 
         }
     }
 
-    function closeDialog() {
-        isDialogOpen = false
+    const closeDialog = () => {
+        isDialogOpen = false 
     }
 
-    async function checkStatus() {
+    const checkStatus = async () => {
         try {
-            const resp = await account.get()
-            if (resp) {
+            const response = await account.get()
+
+            if (response) {
                 goto('/chat')
             }
-        } catch(e) {}
+        }
+        catch(e) {}
     }
 
     function __handleMagicURL() {
@@ -63,31 +69,30 @@
 
     async function checkMagicSession() {
         const urlParams = new URLSearchParams(window.location.search)
-
         const secret = urlParams.get('secret')
         const userId = urlParams.get('userId')
         
-        try {
-            const user = await account.createSession(userId, secret)
-
-            if (user) {
-                goto('/chat')
+        if (secret && userId) {
+            try {
+                const user = await account.createSession(userId, secret)
+                if (user) {
+                    goto('/chat')
+                }
             }
-        }
-        catch(e) {
-
+            catch(e) {}
         }
     }
 
-    checkMagicSession()
-
     onMount(() => {
         checkStatus()
+        checkMagicSession()
+
         function handleKeydown(e) {
             if (e.key === 'Escape') {
                 closeDialog()
             }
         }
+
         window.addEventListener('keydown', handleKeydown)
         return () => {
             window.removeEventListener('keydown', handleKeydown)
