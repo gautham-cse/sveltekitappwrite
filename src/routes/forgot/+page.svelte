@@ -28,7 +28,7 @@
         }
 
         try {
-            await account.createRecovery(email, 'http://localhost:5173/appStartRecovery')
+            await account.createRecovery(email, 'https://sveltekitappwrite-j8f.pages.dev/appStartRecovery')
               .then((response) => {
                  console.log(response)
               }, (error) => {
