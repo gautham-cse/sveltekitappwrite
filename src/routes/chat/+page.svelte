@@ -1,20 +1,4 @@
-<script>
-    function handleAlert() {
-        console.log('You clicked this button')
-    }
-</script>
-
-<div>
-    <button on:click={handleAlert}>Click this button</button>
-</div>
-
-
-
-<!-- Chat.Svelte 
-
-<svelte:head>
-    <title>Home</title>
-</svelte:head>
+<!-- Chat.Svelte -->
 
 <script>
     // @ts-nocheck
@@ -26,28 +10,30 @@
     import NavigationFooter from '../components/navigation-footer/+page.svelte'
     import NavigationRail from '../components/navigation-rail/+page.svelte'
 
-    let username = '. . .', email = '. . .'
+    let username = '. . .'
+    let useremail = '. . .'
 
-    const __handleLogout = async () => {
-        await account.deleteSession('current')
-        console.log('done')
-        goto('/')
+    async function handleLogoutOption() {
+        let logoutMessage = "Are you sure you want to logout?"
+        if (confirm(logoutMessage) == true) {
+            await account.deleteSession('current')
+            goto('/')
+        }
     }
 
-    function unnn() {
-        console.log('ertfgvhbknml,')
-    }
-    const checkStatus = async () => {
+    async function checkStatus() {
         try {
             const response = await account.get()
             if (response) {
                 username = response.name
-                email = response.email
-            } else {
+                useremail = response.email 
+            }
+            else {
                 goto('/')
             }
-        } catch (e) {
-            console.error('Error in checkStatus:', e)
+        }
+        catch(e) {
+            console.log('An unknown error occurred: ', e)
         }
     }
 
@@ -56,31 +42,18 @@
     })
 </script>
 
-<main>
-    <div class="App-Chat">
-        <div class="App-Navigation--Area">
-            <div class="App-LeftNavigation--Area">
-                <NavigationRail />
-            </div> 
-            <br><br><br><br>
-            <div class="App-RightNavigation--Area">
-                <h3>Welcome, {username}</h3>
-                <h5>{email}</h5>
-                <button on:click={unnn}>Logout</button>
-            </div>
-        </div>
-    </div>
-</main>
+<div>
+    <h3>Welcome, {username}</h3>
+    <h5>{useremail}</h5>
+    <button on:click={handleLogoutOption}>Logout</button>
+</div>
+
+<svelte:head>
+    <title>{username}</title>
+</svelte:head>
 
 <style>
-    .App-LeftNavigation--Area {
-        position: fixed;
-        left: 0;
-    }
-    .App-RightNavigation--Area {
+    div {
         color: white;
-        margin-left: 30px;
     }
 </style>
-
--->
