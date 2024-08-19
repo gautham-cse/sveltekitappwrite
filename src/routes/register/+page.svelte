@@ -4,6 +4,7 @@
     <title>App | Register</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </svelte:head>
 
 <script>
@@ -111,6 +112,7 @@
                     <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--z"><input placeholder="Enter Password" type="password" name="password" class="app-input--password"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/">Have account? Login</a></div><div class="a-3-al-right"></div></div>
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAgaLk4bCAi6Hk41" data-callback="javascriptCallback"></div>
                     <button class="a-3--submitBtn" type="submit" disabled={isLoading}>
                         {#if isLoading}
                             <div class="load"></div>
