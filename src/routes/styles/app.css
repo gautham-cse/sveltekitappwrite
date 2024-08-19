@@ -228,7 +228,7 @@ button:focus {
     justify-content: center;
     font-weight: 300;
     font-style: normal;
-    background: -webkit-linear-gradient(225deg, #1b1b1b, #303030,             
+    background: -webkit-linear-gradient(225deg, #2d1d1d, #212b36,             
     #1b1b1b) 0% 0% / 300% 300%;
     background-size: 200% auto;
     -webkit-animation: gradient_move 5s ease-in-out infinite alternate;
