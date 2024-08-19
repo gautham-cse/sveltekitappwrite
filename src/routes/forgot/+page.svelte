@@ -95,7 +95,7 @@
                 <form on:submit|preventDefault={sendMagicUrl}>
                     <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/">Go Back</a></div></div>
-                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAAgaLk4bCAi6Hk41" data-callback="javascriptCallback"></div>
+                    <!-- <div class="cf-turnstile" data-sitekey="0x4AAAAAAAgaLk4bCAi6Hk41" data-callback="javascriptCallback"></div> -->
                     <button class="a-3--submitBtn" type="submit" disabled = {isLoading}>
                         {#if isLoading}
                             <div class="load"></div>
