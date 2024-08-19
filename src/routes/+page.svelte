@@ -20,7 +20,8 @@
     let isLoading = false
     
     console.log('%cStop!', 'color: red; font-size: 45px; font-weight: bold;');
-    console.log('%cThis a browser feature intended for developers. If someone told you to copy-paste something here to enable a <Secure Messenger> feature or "hack" someone\'s account, it is a scam and will give them access to your <Secure Messenger> account.', 'color: white; font-size: 20px;')
+    console.log("%cWarning: This tool is designed exclusively for developers. Please refrain from copying and pasting any information if instructed to unlock features or gain unauthorized access. Such actions may constitute a security threat and compromise the integrity of your account.", 'color: white; font-size: 20px;');
+
     
     const airbase_login = async (e) => {
         e.preventDefault()
@@ -41,7 +42,7 @@
             await user.login(email, password)
             goto('/chat')
         } catch (e) {
-            alert(`Failed to login: ` + e)
+            alert(`Invalid credentials. Please check the email and password`)
             window.location.reload()
         } finally {
             isLoading = false 
@@ -101,6 +102,7 @@
 
     function handleContextMenu(e) {
         e.preventDefault()
+        
     }
 </script>
 
@@ -120,7 +122,13 @@
                     <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--z"><input type="password" placeholder="Enter Password" name="password" class="app-input--password" minlength="8"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/register">New here? Register</a></div><div class="a-3-al--right"><a href="/forgot">Forgot Password?</a></div></div>
-                    <button class="a-3--submitBtn" type="submit" disabled={isLoading}>Continue</button>
+                    <button class="a-3--submitBtn" type="submit" disabled={isLoading}>
+                        {#if isLoading}
+                            <div class="load"></div>
+                        {:else}
+                            {'Continue ->'}
+                        {/if}
+                    </button>
                 </form>
                 <div style="display:flex; justify-content: center; margin-top: -10px;"><p class="app-ftrnt"></p></div>
             </div>

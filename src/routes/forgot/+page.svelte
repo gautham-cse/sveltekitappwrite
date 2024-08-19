@@ -12,18 +12,22 @@
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
     
+    let isLoading = false 
     let formError = null 
     let isDialogOpen = false
 
     const sendMagicUrl = async (e) => {
+        isLoading = true 
         e.preventDefault()
+
         const form = e.target 
         const formData = Object.fromEntries(/** @type Record<string, string | undefined>*/ new FormData(form).entries() )
-        const { email } = formData 
         
+        const { email } = formData
         if (!email) {
-            formError = 'Please enter your email'
+            formError = 'Please enter your email address'
             isDialogOpen = true
+            isLoading = false 
             return 
         }
 
@@ -42,6 +46,9 @@
         }
         catch(e) {
             formError = 'Failed to send password recovery email'
+        }
+        finally {
+            isLoading = false 
         }
     }
 
@@ -87,7 +94,13 @@
                 <form on:submit|preventDefault={sendMagicUrl}>
                     <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/">Go Back</a></div></div>
-                    <button class="a-3--submitBtn" type="submit">Continue</button>
+                    <button class="a-3--submitBtn" type="submit" disabled = {isLoading}>
+                        {#if isLoading}
+                            <div class="load"></div>
+                        {:else}
+                            {'Send Reset Email ->'}
+                        {/if}
+                    </button>
                 </form>
                 <div style="display:flex; justify-content: center; margin-top: -10px;"><p class="app-ftrnt"></p></div>
             </div>

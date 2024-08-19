@@ -17,6 +17,7 @@
     /* @type {string|null} */
     let formError = null 
     let isDialogOpen = false
+    let isLoading = false 
 
     function sanitizeUsername(username) {
         let sanitized = username.replace(/\s+/g,'_')
@@ -35,6 +36,7 @@
     const airbase_register = async (e) => {
         e.preventDefault()
         const form = (e.target)
+        isLoading = true 
 
         const formData = /** @type Record<string, string | undefined> */ (
             Object.fromEntries(new FormData(form).entries())
@@ -46,6 +48,7 @@
         if (!email || !password || !name) {
             formError = 'Please fill out fields'
             isDialogOpen = true
+            isLoading = false 
             return
         }
         try {
@@ -54,27 +57,29 @@
             goto('/')
         }
         catch(e) {
-            console.error('Registration error: ', e)
-            formError = 'An error occurred. Please try again'
-            isDialogOpen = true
+            alert(`We couldn\'t complete your registration. Please ensure all fields are correct and try again. \nAlso check this - ${e}`)
+            window.location.reload()
+        }
+        finally {
+            isLoading = false 
         }
     }
 
-    async function checkStatus() {
+    /* async function checkStatus() {
         try {
             const resp = await account.get()
             if (resp) {
                 goto('/chat')
             }
         } catch(e) {}
-    }
+    } */
 
     // @ts-ignore
     function closeDialog() { 
         isDialogOpen = false 
     }
     onMount(() => {
-        checkStatus()
+        // checkStatus()
         // @ts-ignore
         function handleKeydown(e){ 
             if (e.key === 'Escape') { 
@@ -106,7 +111,13 @@
                     <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--z"><input placeholder="Enter Password" type="password" name="password" class="app-input--password"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/">Have account? Login</a></div><div class="a-3-al-right"></div></div>
-                    <button class="a-3--submitBtn" type="submit">Continue</button>
+                    <button class="a-3--submitBtn" type="submit" disabled={isLoading}>
+                        {#if isLoading}
+                            <div class="load"></div>
+                        {:else}
+                            {'Continue ->'}
+                        {/if}
+                    </button>
                 </form>
                 <div style="display:flex; justify-content: center; margin-top: -10px;"><p class="app-ftrnt"></p></div>
             </div>

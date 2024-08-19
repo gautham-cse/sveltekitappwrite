@@ -26,7 +26,8 @@
         }
       }
       else {
-        isLoading = false 
+          // Add setTimeout(()=>{ isLoading = false }) to stop user to check if he is legit. 
+          isLoading = false 
       }
   })
 </script>

@@ -13,12 +13,14 @@
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
     
+    let isLoading = false 
     let isDialogOpen = false 
 
     const sendMagicUrl = async (e) => {
+        isLoading = true 
         e.preventDefault()
-        const form = e.target 
 
+        const form = e.target 
         const formData = Object.fromEntries(/** @type Record<string, string | undefined>*/
             new FormData(form).entries()
         )
@@ -26,12 +28,18 @@
         const { email } = formData 
         if (!email) {
             isDialogOpen = true
+            isLoading = false 
             return 
         }
         try {
-            await account.createMagicURLToken(ID.unique(), email, 'https://sveltekitappwrite-j8f.pages.dev/') 
+            await account.createMagicURLToken(ID.unique(), email, 'https://sveltekitappwrite-j8f.pages.dev/')
+            alert('Magic Link successfully sent. Please check your inbox.')
+            goto('/')
         }
-        catch(e) {}
+        catch(e) {
+            alert('Failed to send magic link: ', e)
+        }
+        finally { isLoading = false }
     }
 
     function closeDialog() {
@@ -44,7 +52,8 @@
             if (resp) {
                 goto('/chat')
             }
-        } catch(e) {}
+        } catch(e) {
+        }
     }
 
     onMount(() => {
@@ -76,7 +85,13 @@
                 <form on:submit|preventDefault={sendMagicUrl}>
                     <div class="a-3--z"><input placeholder="Email Address" type="email" class="app-input--email" draggable="false" id="app-uemail" name="email" autocomplete="off" spellcheck="false"/></div>
                     <div class="a-3--alpha"><div class="a-3-al--left"><a href="/">Go Back</a></div></div>
-                    <button class="a-3--submitBtn" type="submit">Send Magic Link</button>
+                    <button class="a-3--submitBtn" type="submit" disabled={isLoading}>
+                        {#if isLoading}
+                            <div class="load"></div>
+                        {:else}
+                            {'Send Magic Link ->'}
+                        {/if}
+                    </button>
                 </form>
                 <div style="display:flex; justify-content: center; margin-top: -10px;"><p class="app-ftrnt"></p></div>
             </div>
